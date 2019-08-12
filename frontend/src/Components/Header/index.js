@@ -20,10 +20,10 @@ function Header(props) {
                             <NavLink exact to='/' activeClassName='active'>Главная</NavLink>
                         </NavItem>
                         <NavItem>
-                            <NavLink to='/services' activeClassName='active'>Услуги</NavLink>
+                            <NavLink to='/doctors' activeClassName='active'>Специалисты</NavLink>
                         </NavItem>
                         <NavItem>
-                            <NavLink to='/doctors' activeClassName='active'>Специалисты</NavLink>
+                            <NavLink to='/reception' activeClassName='active'>Запись на приём</NavLink>
                         </NavItem>
                         <NavItem>
                             <NavLink to='/contacts' activeClassName='active'>Контакты</NavLink>
