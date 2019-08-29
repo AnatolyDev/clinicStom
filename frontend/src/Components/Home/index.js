@@ -5,28 +5,28 @@ import { UncontrolledCarousel, Container } from 'reactstrap';
 
 const items = [
     {
-      src: './carousel/1.jpg',
+      src: './img/carousel/1.jpg',
       altText: 'Slide 1',
-      caption: 'Slide 1',
-      header: 'Slide 1 Header'
+      caption: 'Индивидуальный подход',
+      header: ''
     },
     {
-      src: './carousel/2.jpg',
+      src: './img/carousel/2.jpg',
       altText: 'Slide 2',
-      caption: 'Slide 2',
-      header: 'Slide 2 Header'
+      caption: 'Профессиональная чистка',
+      header: ''
     },
     {
-      src: './carousel/3.jpg',
+      src: './img/carousel/3.jpg',
       altText: 'Slide 3',
-      caption: 'Slide 3',
-      header: 'Slide 3 Header'
+      caption: 'Современная диагностика',
+      header: ''
     },
     {
-      src: './carousel/4.jpg',
+      src: './img/carousel/4.jpg',
       altText: 'Slide 4',
-      caption: 'Slide 4',
-      header: 'Slide 4 Header'
+      caption: 'Широкий перечень услуг',
+      header: ''
     }
   ];
 
