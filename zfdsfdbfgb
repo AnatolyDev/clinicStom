@@ -1,0 +1,59 @@
+[33mcommit 5bcc0cf4cdc54ea3ba76eb2c92acea6fceaceaf3[m[33m ([m[1;36mHEAD -> [m[1;32mdevelop[m[33m, [m[1;31morigin/develop[m[33m)[m
+Author: Anatoly <tolik_83@mail.ru>
+Date:   Tue Sep 3 16:42:00 2019 +0300
+
+    alpha 1.0.1
+
+[33mcommit 469d1ef12270509591f4f2f244f6e7cc9a820c09[m
+Author: Anatoly <tolik_83@mail.ru>
+Date:   Tue Sep 3 00:04:45 2019 +0300
+
+    alpha 1.0.0
+
+[33mcommit d60812b7396f9f56ea4bbceea3bed2417675633e[m
+Author: Anatoly <tolik_83@mail.ru>
+Date:   Mon Sep 2 16:38:52 2019 +0300
+
+    Минимальный api
+
+[33mcommit 90320431c9b8977021845f9819fac754b87baf52[m
+Author: Anatoly <tolik_83@mail.ru>
+Date:   Thu Aug 29 23:39:01 2019 +0300
+
+    Шаблон фронтенда
+
+[33mcommit 3144c9ec5a42e04680a2a0f2810b43b29a46f434[m
+Author: Anatoly <tolik_83@mail.ru>
+Date:   Mon Aug 12 23:52:12 2019 +0300
+
+    Запись v 1.0
+
+[33mcommit 95fa41f7624e5f96de0ba2ec3909d14ab2ba82d6[m
+Author: Anatoly <tolik_83@mail.ru>
+Date:   Sun Aug 11 23:30:50 2019 +0300
+
+    Галерея-карусель
+
+[33mcommit 3b1f3ea41b1c649f13ab77aaab698368d3444167[m
+Author: Anatoly <tolik_83@mail.ru>
+Date:   Fri Aug 9 16:46:06 2019 +0300
+
+    Заголовок сайта
+
+[33mcommit 149d17a195edcd25e32c6647bebb1c2d8f61c1e1[m
+Author: Anatoly <tolik_83@mail.ru>
+Date:   Fri Aug 9 00:43:34 2019 +0400
+
+    Заголовок сайта
+
+[33mcommit b6d5cb4a57377f98f164a65d6dd5d9f87d41b89c[m[33m ([m[1;31morigin/master[m[33m, [m[1;31morigin/HEAD[m[33m)[m
+Author: AnatolyDev <36366696+AnatolyDev@users.noreply.github.com>
+Date:   Thu Aug 1 22:39:07 2019 +0300
+
+    Update README.md
+
+[33mcommit 7f9bd7991fea750287763815669dd5c1120b25c9[m
+Author: AnatolyDev <36366696+AnatolyDev@users.noreply.github.com>
+Date:   Thu Aug 1 22:38:18 2019 +0300
+
+    Initial commit

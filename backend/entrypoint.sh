@@ -1,12 +1,4 @@
 #!/bin/bash
-source ../venv/bin/activate
-sleep 5
-while true; do
-    flask db upgrade
-    if [[ "$?" == "0" ]]; then
-        break
-    fi
-    echo Upgrade command failed, retrying in 5 secs...
-    sleep 5
-done
+export APP_SETTINGS="config.DevelopmentConfig"
+export DATABASE_URL='postgresql://user:12341234@10.0.2.15/stom'
 exec gunicorn -b :5000 --access-logfile - --error-logfile - manage:app

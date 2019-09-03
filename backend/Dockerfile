@@ -1,7 +1,7 @@
 FROM python:3.6-stretch
 
 ENV HOME=/home
-ENV APP_HOME=/home/consumer
+ENV APP_HOME=/home/doctor
 
 RUN mkdir -p $APP_HOME
 
