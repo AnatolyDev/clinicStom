@@ -1,7 +1,9 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Container, Row, Col,
     Input,
     Button, ButtonGroup } from 'reactstrap';
+
+import clientapi from '../../api';
 
 import DayPicker from 'react-day-picker';
 import 'react-day-picker/lib/style.css';
@@ -31,27 +33,26 @@ const WEEKDAYS_LONG = [
   ];
 const WEEKDAYS_SHORT = ['Вс', 'Пн', 'Вт', 'Ср', 'Чт', 'Пт', 'Сб'];
 
-const DOCTORS = [
-    {
-        id : 1,
-        name : 'Иванов Пётр Степанович'
-    },
-    {
-        id : 2,
-        name : 'Селиванова Нина Евгеньевна'
-    },
-    {
-        id : 3,
-        name : 'Коровина Дина Петровна'
-    },
-    {
-        id : 4,
-        name : 'Нафикова Рузалья Асхатовна'
+const parseErrorFromAxios = error => {
+    if (error.response) {
+        // сервер ответил
+        console.log(error.response);
+        alert('Ошибка ' + error.response.status + ' : ' + error.response.data)
+    } else if (error.request) {
+        // запрос ушёл, но ответа от сервера не получено
+        console.log(error.request);
+        alert('Ошибка! Сервер не отвечает!')
+    } else {
+        // прочие ошибки
+        console.log(error);
+        if (error.message)
+            alert('Ошибка! ' + error.message)
     }
-]
+}
 
 function Reception() {
 
+    const [doctorList, setDoctorList] = useState([]);
     const [doctor, setDoctor] = useState(0);
     const [selectedDay, setDay] = useState(undefined);
     const [selectedTime, setTime] = useState(undefined);
@@ -70,6 +71,21 @@ function Reception() {
     function handleTimeSelect(rSelected) {
         setTime(rSelected);
     }
+    
+    useEffect(
+        () => {
+            console.log('Запрос');
+            clientapi().get('/api/doctors/')
+            .then(
+                data => {
+                    console.log(data)
+                }
+            )
+        },
+        []
+    )
+
+    
 
     return (
         <Container>
@@ -87,7 +103,7 @@ function Reception() {
                         <option key={0} value={0} disabled>
                             Выберите врача...
                         </option>
-                        {DOCTORS.map(
+                        {doctorList.map(
                             doctor => (
                                 <option key={doctor.id} value={doctor.id}>
                                     {doctor.name}
