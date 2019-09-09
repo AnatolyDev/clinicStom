@@ -1,5 +1,5 @@
 from flask import Blueprint, request, jsonify
-from .models import Doctor, DoctorSchema, db
+from .models import Doctor, DoctorSchema, Reception, ReceptionSchema, db
 
 module = Blueprint('api', __name__, url_prefix='/api')
 doctor_schema = DoctorSchema()
@@ -30,3 +30,13 @@ def deleteDoctor():
     db.session.delete(doctor)
     db.session.commit()
     return {'result' : 'Doctor {0} was deleted'.format(doctor.name)}
+
+# запись ко врачу
+# добавить запись
+@module.route('/reception/add/', methods=['POST'])
+def addPriem():
+    data = request.get_json()
+    day = data['day']
+    time = data['time']
+    client = data['client']
+    doctor_id = data['doctor_id']
