@@ -3,6 +3,7 @@ from .models import Doctor, DoctorSchema, Reception, ReceptionSchema, db
 
 module = Blueprint('api', __name__, url_prefix='/api')
 doctor_schema = DoctorSchema()
+reception_schema = ReceptionSchema()
 
 @module.route('/doctors/', methods=['GET'])
 def getDoctors():
@@ -40,3 +41,33 @@ def addPriem():
     time = data['time']
     client = data['client']
     doctor_id = data['doctor_id']
+    if not day or not time or not doctor_id:
+        return {'result' : 'Not enough options'}
+    doctor = Doctor.query.filter_by(id=doctor_id).first()
+    if not doctor:
+        return {'result' : 'No doctor with id={}'.format(doctor_id)}
+    else:
+        try:
+            newReception = Reception(day=day, time=time, client=client, doctor=doctor)
+            db.session.add(newReception)
+            db.session.commit()
+            return {'result' : 'Added a new entry to the doctor %s with id=%d' % (doctor.name, newReception.id)}
+        except:
+            return {'result' : 'Error adding seans'}
+
+# вывести записи к заданному врачу за день
+@module.route('/reception/', methods=['POST'])
+def getPriem():
+    data = request.get_json()
+    doctor_id = data['doctor_id']
+    day = data['day']
+    if not doctor_id:
+        return {'result' : 'No doctor'}
+    if not day:
+        return {'result' : 'No day'}
+    
+    receptions = Reception.query.filter_by(doctor_id=doctor_id, day=day).order_by(Reception.time.asc()).all()
+    receptions_list = []
+    for rec in receptions:
+        receptions_list.append(reception_schema.dump(rec))
+    return {'receptions' : receptions_list}
