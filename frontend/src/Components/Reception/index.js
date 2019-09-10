@@ -56,6 +56,7 @@ function Reception() {
     const [doctor, setDoctor] = useState(0);
     const [selectedDay, setDay] = useState(undefined);
     const [selectedTime, setTime] = useState(undefined);
+    const [bisyTime, setBisyTime] = useState([])
 
     function handleDoctorChange(e) {
         setDoctor(e.target.value);
@@ -78,11 +79,24 @@ function Reception() {
             clientapi().get('/api/doctors/')
             .then(
                 data => {
-                    console.log(data)
+                    setDoctorList(data.data.doctors)
                 }
             )
         },
         []
+    )
+
+    useEffect(
+        () => {
+            console.log('Эффект при смене даты: выбор занятого времени');
+            clientapi().post('/api/reception/', {"doctor_id" : doctor, "day" : selectedDay})
+            .then(
+                data => {
+                    console.log(data)
+                }
+            )
+        },
+        [doctor, selectedDay]
     )
 
     
@@ -142,11 +156,12 @@ function Reception() {
                         {[8,9,10,11,12,13].map(
                             t => ( 
                                 <Button
-                                    outline
+                                    outline={8 !== t}
                                     disabled={8 === t}
                                     color="primary"
                                     onClick={() => handleTimeSelect(t)}
                                     active={selectedTime === t}
+                                    key={t}
                                     >
                                     {t}
                                 </Button>
