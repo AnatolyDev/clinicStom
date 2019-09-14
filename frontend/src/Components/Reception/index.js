@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { Container, Row, Col,
     Input,
-    Button, ButtonGroup } from 'reactstrap';
+    Button, ButtonGroup,
+    Alert } from 'reactstrap';
 
 import clientapi from '../../api';
 
@@ -57,6 +58,7 @@ function Reception() {
     const [selectedDay, setDay] = useState(undefined);
     const [selectedTime, setTime] = useState(undefined);
     const [bisyTime, setBisyTime] = useState([])
+    const [alertVisible, setAlertVisible] = useState(false)
 
     function handleDoctorChange(e) {
         setDoctor(e.target.value);
@@ -71,6 +73,33 @@ function Reception() {
 
     function handleTimeSelect(rSelected) {
         setTime(rSelected);
+    }
+
+    function setReceptionForDoctor() {
+        const r = {
+            "day"  : selectedDay,
+            "time" : selectedTime,
+            "doctor_id" : doctor,
+            "client" : "Client"
+        }
+        clientapi().post('/api/reception/add/', r)
+        .then(data => {
+            console.log(data)
+        })
+        .then(showAlert())
+        .catch(error => {
+            parseErrorFromAxios(error)
+        })
+    }
+
+    function showAlert() {
+        setAlertVisible(true);
+        setTimeout(
+            ()=>{
+                setAlertVisible(false)
+            },
+            3000
+          )
     }
     
     useEffect(
@@ -92,7 +121,11 @@ function Reception() {
             clientapi().post('/api/reception/', {"doctor_id" : doctor, "day" : selectedDay})
             .then(
                 data => {
-                    console.log(data)
+                    console.log(data);
+                    const bisy = data.data.receptions.map(
+                        t => t.time
+                    )
+                    setBisyTime(bisy);
                 }
             )
         },
@@ -156,8 +189,8 @@ function Reception() {
                         {[8,9,10,11,12,13].map(
                             t => ( 
                                 <Button
-                                    outline={8 !== t}
-                                    disabled={8 === t}
+                                    outline={!bisyTime.includes(t)}
+                                    disabled={bisyTime.includes(t)}
                                     color="primary"
                                     onClick={() => handleTimeSelect(t)}
                                     active={selectedTime === t}
@@ -173,9 +206,22 @@ function Reception() {
             {selectedTime &&
             <Row>
                 <Col>
-                    <Button outline color="success">Записаться</Button>
+                    <Button
+                        outline
+                        color="success"
+                        onClick={setReceptionForDoctor}
+                    >
+                        Записаться
+                    </Button>
                 </Col>
             </Row>}
+            <Row>
+                <Col>
+                    <Alert color="info" isOpen={alertVisible}>
+                        Удачно
+                    </Alert>
+                </Col>
+            </Row>
         </Container>
     )
 }
