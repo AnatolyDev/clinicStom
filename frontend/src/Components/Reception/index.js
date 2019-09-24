@@ -4,7 +4,7 @@ import { Container, Row, Col,
     Button, ButtonGroup,
     Alert } from 'reactstrap';
 
-import clientapi from '../../api';
+import { doctorAPI, receptionAPI } from '../../api';
 
 import DayPicker from 'react-day-picker';
 import 'react-day-picker/lib/style.css';
@@ -76,20 +76,7 @@ function Reception() {
     }
 
     function setReceptionForDoctor() {
-        const r = {
-            "day"  : selectedDay,
-            "time" : selectedTime,
-            "doctor_id" : doctor,
-            "client" : "Client"
-        }
-        clientapi().post('/api/reception/add/', r)
-        .then(data => {
-            console.log(data)
-        })
-        .then(showAlert())
-        .catch(error => {
-            parseErrorFromAxios(error)
-        })
+        receptionAPI.setReceptionForDoctor(selectedDay, selectedTime, doctor, "Client", showAlert)
     }
 
     function showAlert() {
@@ -105,17 +92,18 @@ function Reception() {
     useEffect(
         () => {
             console.log('Запрос');
-            clientapi().get('/api/doctors/')
+            doctorAPI.getDoctors()
             .then(
                 data => {
-                    setDoctorList(data.data.doctors)
+                    console.log(data)
+                    setDoctorList(data.doctors)
                 }
             )
         },
         []
     )
 
-    useEffect(
+    /*useEffect(
         () => {
             console.log('Эффект при смене даты: выбор занятого времени');
             clientapi().post('/api/reception/', {"doctor_id" : doctor, "day" : selectedDay})
@@ -130,7 +118,7 @@ function Reception() {
             )
         },
         [doctor, selectedDay]
-    )
+    )*/
 
     
 
