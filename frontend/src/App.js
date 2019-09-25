@@ -7,6 +7,7 @@ import Header from './Components/Header';
 import Home from './Components/Home';
 import Reception from './Components/Reception';
 import Doctors from './Components/Doctors';
+import Doctor from './Components/Doctor';
 
 function App() {
   return (
@@ -14,7 +15,8 @@ function App() {
       <Header />
       <Switch>
         <Route path='/' exact component={Home}/>
-        <Route path='/doctors' component={Doctors} />
+        <Route path='/doctors' exact component={Doctors} />
+        <Route path='/doctors/:id' component={Doctor} />
         <Route path='/reception' component={Reception} />
       </Switch>
     </div>

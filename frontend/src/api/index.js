@@ -52,7 +52,22 @@ export const doctorAPI = {
                     
                 }, 1000)           
         })
-    } 
+    },
+
+    getDoctorInfo(id) {
+        return new Promise((resolve, reject) => {
+            setTimeout(
+                () => {
+                    resolve({
+                        "id" : id,
+                        "name" : "Vasya",
+                        "photo" : `${id}.jpg`,
+                        "about" : "Окончил институт в 1861 году. Имеет президентскую награду"
+                    })
+                }                
+            ,1000)
+        })
+    }
 }
 
 export const receptionAPI = {
