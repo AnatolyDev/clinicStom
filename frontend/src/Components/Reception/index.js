@@ -57,8 +57,9 @@ function Reception() {
     const [doctor, setDoctor] = useState(0);
     const [selectedDay, setDay] = useState(undefined);
     const [selectedTime, setTime] = useState(undefined);
-    const [bisyTime, setBisyTime] = useState([])
-    const [alertVisible, setAlertVisible] = useState(false)
+    const [bisyTime, setBisyTime] = useState([]);
+    const [alertVisible, setAlertVisible] = useState(false);
+    const [timeRuleVisible, setTimeRuleVisible] = useState(false);
 
     function handleDoctorChange(e) {
         setDoctor(e.target.value);
@@ -91,7 +92,7 @@ function Reception() {
     
     useEffect(
         () => {
-            console.log('Запрос');
+            console.log('Запрос списка врачей');
             doctorAPI.getDoctors()
             .then(
                 data => {
@@ -103,22 +104,20 @@ function Reception() {
         []
     )
 
-    /*useEffect(
+    useEffect(
         () => {
+            setTimeRuleVisible(false);
             console.log('Эффект при смене даты: выбор занятого времени');
-            clientapi().post('/api/reception/', {"doctor_id" : doctor, "day" : selectedDay})
+            receptionAPI.getBisyTime(doctor, selectedDay)
             .then(
                 data => {
-                    console.log(data);
-                    const bisy = data.data.receptions.map(
-                        t => t.time
-                    )
-                    setBisyTime(bisy);
+                    setBisyTime(data);
+                    setTimeRuleVisible(selectedDay);
                 }
             )
         },
         [doctor, selectedDay]
-    )*/
+    )
 
     
 
@@ -167,7 +166,7 @@ function Reception() {
                     </div>
                 </Col>
             </Row>}
-            {selectedDay &&
+            {timeRuleVisible &&
             <Row>
                 <Col>
                     Выберите время

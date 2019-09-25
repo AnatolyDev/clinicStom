@@ -14,7 +14,7 @@ function Header(props) {
                 <Col>
                     <img src={logo} alt='логотип' />
                 </Col>
-                <Col>
+                <Col lg="9">
                     <Nav className='main-menu'>
                         <NavItem>
                             <NavLink exact to='/' activeClassName='active'>Главная</NavLink>
