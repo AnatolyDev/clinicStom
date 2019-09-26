@@ -29,7 +29,6 @@ function Header(props) {
                             <NavLink to='/contacts' activeClassName='active'>Контакты</NavLink>
                         </NavItem>
                     </Nav>
-                    <hr />
                 </Col>
             </Row>
             <Row>
