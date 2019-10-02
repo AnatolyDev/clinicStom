@@ -9,18 +9,16 @@ function Doctors() {
     const [loading, setLoading] = useState(false);
     const [doctorList, setDoctorList] = useState([]);
 
-    useEffect(
-        () => {
-            console.log('Запрос списка врачей');
-            setLoading(true);
-            doctorAPI.getDoctors()
-            .then(
-                data => {
-                    console.log(data)
-                    setDoctorList(data.doctors)
-                    setLoading(false);
-                }
-            )
+    useEffect(() => {
+            async function getDoctors() {
+                console.log('Запрос списка врачей');
+                setLoading(true);
+                const data = await doctorAPI.getDoctors();
+                console.log(data)
+                setDoctorList(data.doctors)
+                setLoading(false);
+            };
+            getDoctors();
         },
         []
     )

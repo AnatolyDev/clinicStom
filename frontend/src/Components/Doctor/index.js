@@ -10,14 +10,13 @@ const Doctor = (props) => {
 
     useEffect(
         () => {
-            setId(props.match.params.id);
-            doctorAPI.getDoctorInfo(id)
-            .then(
-                doctor => {
-                    setDoctorInfo(doctor);
-                    setLoading(false);
-                }
-            )
+            async function getDoctorInfo() {
+                setId(props.match.params.id);
+                const doctor = await doctorAPI.getDoctorInfo(id);
+                setDoctorInfo(doctor);
+                setLoading(false);
+            }
+            getDoctorInfo();
         },
         []
     )
